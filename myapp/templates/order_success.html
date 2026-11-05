@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Order placed — Common Ground{% endblock %}
+{% block content %}
+<section class="success-page">
+    <span class="success-mark" aria-hidden="true">✓</span>
+    <p class="eyebrow">A GOOD THING IS ON ITS WAY</p>
+    <h1>Well, this is <em>lovely.</em></h1>
+    <p class="success-copy">Thanks, {{ order.customer_name }}. Your order is in, and we'll send the details to {{ order.email }}.</p>
+    <div class="success-details"><div><span>Order number</span><strong>{{ order.number|slice:":8"|upper }}</strong></div><div><span>Total, due on delivery</span><strong>${{ order.total|floatformat:2 }}</strong></div></div>
+    <a class="button button--dark" href="{% url 'home' %}#shop">Back to the good things <span aria-hidden="true">↗</span></a>
+</section>
+{% endblock %}

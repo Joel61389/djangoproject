@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Your bag — Common Ground{% endblock %}
+{% block content %}
+<section class="page-shell bag-page">
+    <p class="eyebrow">THE GOOD THINGS YOU FOUND</p>
+    <h1>Your <em>bag.</em></h1>
+    {% if lines %}
+    <div class="bag-layout">
+        <div class="bag-items">
+            {% for line in lines %}
+            <article class="bag-item">
+                <img src="{{ line.product.image_url }}" alt="{{ line.product.image_alt }}">
+                <div class="bag-item-info"><span class="product-category">{{ line.product.category }}</span><h2>{{ line.product.name }}</h2><p>${{ line.product.price|floatformat:2 }} each</p></div>
+                <form class="quantity-form" method="post" action="{% url 'cart' %}">
+                    {% csrf_token %}<input type="hidden" name="action" value="update"><input type="hidden" name="slug" value="{{ line.product.slug }}">
+                    <label for="quantity-{{ line.product.slug }}">Quantity</label><input id="quantity-{{ line.product.slug }}" name="quantity" type="number" min="1" max="99" value="{{ line.quantity }}">
+                    <button class="small-submit" type="submit">Update</button>
+                </form>
+                <div class="bag-line-total"><span>${{ line.line_total|floatformat:2 }}</span><form method="post" action="{% url 'cart' %}">{% csrf_token %}<input type="hidden" name="action" value="remove"><input type="hidden" name="slug" value="{{ line.product.slug }}"><button class="remove-button" type="submit" aria-label="Remove {{ line.product.name }} from your bag">Remove</button></form></div>
+            </article>
+            {% endfor %}
+        </div>
+        <aside class="order-summary" aria-labelledby="summary-title">
+            <h2 id="summary-title">A little summary</h2>
+            <div class="summary-row"><span>Subtotal</span><span>${{ total|floatformat:2 }}</span></div>
+            <div class="summary-row"><span>Delivery</span><span>{% if delivery_fee == 0 %}On us{% else %}${{ delivery_fee|floatformat:2 }}{% endif %}</span></div>
+            <div class="summary-total"><span>Total</span><span>${{ grand_total|floatformat:2 }}</span></div>
+            <p class="summary-note">Free delivery on orders over $100. Otherwise, delivery is $8. Payment is due on delivery.</p>
+            <a class="button button--dark button--wide" href="{% url 'checkout' %}">Continue to checkout <span aria-hidden="true">↗</span></a>
+            <a class="text-link summary-continue" href="{% url 'home' %}#shop">Keep looking <span aria-hidden="true">↗</span></a>
+        </aside>
+    </div>
+    {% else %}
+    <div class="empty-bag"><span aria-hidden="true">✳</span><h2>Your bag is taking a breather.</h2><p>There are plenty of good things waiting to come home with you.</p><a class="button button--dark" href="{% url 'home' %}#shop">Explore the shop <span aria-hidden="true">↗</span></a></div>
+    {% endif %}
+</section>
+{% endblock %}

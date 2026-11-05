@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us</title>
-</head>
-<body>
-    <h1>Contact Us</h1>
-    <p>Get in touch with us!</p>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}Contact — Common Ground{% endblock %}
+{% block content %}
+<section class="contact-page">
+     <div><p class="eyebrow">WE'RE RIGHT HERE</p><h1>Say <em>hello.</em></h1><p>Questions about an order, a product, or just want to tell us how it's settling in? We'd love to hear from you.</p></div>
+     <div class="contact-details"><span>GOOD THINGS, HUMAN HELP</span><a href="mailto:hello@commonground.example">hello@commonground.example</a><p>Monday–Friday<br>9am–5pm, your local time</p></div>
+</section>
+{% endblock %}

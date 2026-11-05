@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About us</title>
-</head>
-<body>
-    <h1>About Us</h1>
-    <p>Welcome to our about page!  </p>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}Our approach — Common Ground{% endblock %}
+{% block content %}
+<section class="story-page">
+     <div class="story-copy"><p class="eyebrow">A PLACE FOR THE EVERYDAY</p><h1>Less stuff.<br><em>More feeling.</em></h1><p>Home isn't a finished picture. It's the lamp you leave on for someone, the cup that fits just right, the blanket that always gets borrowed.</p><p>We bring together useful, well-made things that earn their place in your everyday. Thoughtful materials, friendly shapes, and nothing that needs to be saved for later.</p><a class="button button--dark" href="{% url 'home' %}#shop">Meet the collection <span aria-hidden="true">↗</span></a></div>
+     <img src="https://images.unsplash.com/photo-1616486029423-aaa4789e8c9a?auto=format&fit=crop&w=1200&q=85" alt="A welcoming home interior with tactile furniture and natural light" loading="lazy">
+</section>
+{% endblock %}
